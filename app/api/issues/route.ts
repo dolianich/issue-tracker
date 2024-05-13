@@ -1,9 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
-import prisma from "@/prisma/client";
-import {issueSchema} from '@/app/validationSchemas';
-import { getServerSession } from "next-auth";
 import authOptions from "@/app/auth/authOptions";
+import { issueSchema } from '@/app/validationSchemas';
+import prisma from "@/prisma/client";
+import { getServerSession } from "next-auth";
+import { NextRequest, NextResponse } from "next/server";
 
 
 export async function POST(request: NextRequest) {
