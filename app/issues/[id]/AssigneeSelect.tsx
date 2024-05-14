@@ -2,12 +2,12 @@
 import React, { useEffect } from 'react';
 import { Select } from '@radix-ui/themes';
 import { useState } from 'react';
-import { User } from '@prisma/client';
+import { Issue, User } from '@prisma/client';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { Skeleton } from '@/app/components';
 
-const AssigneeSelect = () => {
+const AssigneeSelect = ({ issue }: { issue: Issue }) => {
   const {
     data: users,
     error,
@@ -24,7 +24,11 @@ const AssigneeSelect = () => {
   if (error) return null;
 
   return (
-    <Select.Root>
+    <Select.Root
+      onValueChange={(userId) => {
+        axios.patch('/api/issues/' + issue.id, { assignedToUserId: userId });
+      }}
+    >
       <Select.Trigger placeholder="Assign..." />
       <Select.Content>
         <Select.Group>
