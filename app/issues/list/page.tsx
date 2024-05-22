@@ -7,6 +7,7 @@ import NextLink from 'next/link';
 import { ArrowUpIcon } from '@radix-ui/react-icons';
 import Pagination from '@/app/components/Pagination';
 import IssueTable, { columnNames, IssueQuery } from './IssueTable';
+import { Metadata } from 'next';
 
 interface Props {
   searchParams: IssueQuery;
@@ -37,7 +38,7 @@ const IssuesPage = async ({
 
   const issueCount = await prisma.issue.count({ where });
   return (
-    <Flex direction='column' gap='3'>
+    <Flex direction="column" gap="3">
       <IssueActions />
       <IssueTable searchParams={searchParams} issues={issues} />
       <Pagination
@@ -50,5 +51,10 @@ const IssuesPage = async ({
 };
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+  title: 'Issue Tracker - Issue List',
+  description: 'View all project issues',
+};
 
 export default IssuesPage;
